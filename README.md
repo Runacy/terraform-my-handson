@@ -31,4 +31,8 @@ docker run --rm -it -p 9000:9000 -v $(pwd):/src im2nguyen/rover
 ![Roverで表示](./public/rover.svg)
 
 
+### リソースごとの権限管理
+- 目的
+  - 間違ってリソースを削除したりしないようにしたい。
+
 
