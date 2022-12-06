@@ -21,5 +21,14 @@ terraform graph | dot -Tpng >| architecture.png
 
 <br>
 
+- [Rover -Terraform Visualizer](https://github.com/im2nguyen/rover)
+を使う。
+
+```
+cd learn-terraform-gcp
+docker run --rm -it -p 9000:9000 -v $(pwd):/src im2nguyen/rover
+```
+![Roverで表示](./public/rover.svg)
+
 
 
