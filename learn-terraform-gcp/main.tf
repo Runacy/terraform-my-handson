@@ -8,11 +8,10 @@ terraform {
 }
 
 provider "google" {
-  credentials = file("credential/credential.json")
-
-  project = "skillful-rain-326107"
-  region  = "asia-northeast1"
-  zone    = "asia-northeast1-a"
+  credentials = file(var.credentials_file)
+  project     = var.project
+  region      = var.region
+  zone        = var.zone
 }
 
 resource "google_compute_network" "vpc_network" {
@@ -23,20 +22,20 @@ resource "google_compute_network" "vpc_network" {
 resource "google_compute_subnetwork" "subnet" {
   name          = "my-subnet"
   ip_cidr_range = "10.0.0.0/24"
-  region        = "asia-northeast1"
+  region        = var.region
   network       = google_compute_network.vpc_network.self_link
 }
 
 resource "google_compute_address" "static-ip" {
   name   = "my-static-ip"
-  region = "asia-northeast1"
+  region = var.region
 }
 
 
 resource "google_compute_instance" "vm_instance" {
   name         = "terraform-instance"
   machine_type = "e2-micro"
-  zone         = "asia-northeast1-a"
+  zone         = var.zone
 
   boot_disk {
     initialize_params {
@@ -50,6 +49,7 @@ resource "google_compute_instance" "vm_instance" {
     network    = google_compute_network.vpc_network.name
     subnetwork = google_compute_subnetwork.subnet.self_link
     access_config {
+      nat_ip = google_compute_address.static-ip.address
     }
   }
 }
