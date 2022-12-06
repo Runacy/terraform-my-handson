@@ -1,4 +1,4 @@
-# terraform-my-handson
+# terraform-my-hands-on
 
 - reference
   - [TerraForm 公式 インストール](https://developer.hashicorp.com/terraform/downloads)
